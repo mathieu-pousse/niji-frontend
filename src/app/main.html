@@ -3,7 +3,11 @@
   <main class="main">
     <fountain-title></fountain-title>
     autocomplete goes here:
-    <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in getMatches(searchText)" md-item-text="item.display">
+    <md-autocomplete 
+      md-selected-item="$ctrl.selectedItem"
+      md-items="item in $ctrl.getMatches(searchText)" 
+      md-item-text="item.display"
+      placeholder="What is your favorite US state?">
       <span md-highlight-text="searchText">{{item.display}}</span>
     </md-autocomplete>
 

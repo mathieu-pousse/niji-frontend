@@ -1,11 +1,21 @@
 class MainController {
   /** @ngInject */
-  constructor($http) {
-    
+  constructor($q, $http) {
+    this.$q = $q
+    this.$http = $http
   }
 
   getMatches(input) {
-    return [{display: "yo"}, {display:"mma"}]
+    const result = this.$q.defer()
+    result.resolve([
+        {display: "yo"},
+        {display: "mma"}, 
+        {display: "mma1"}, 
+        {display: "mma2"}, 
+        {display: "mma3"}, 
+        {display: "mma4"}
+      ])
+    return result.promise
   }
 }
 

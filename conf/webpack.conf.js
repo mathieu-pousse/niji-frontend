@@ -5,6 +5,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
+const SASS_INCLUDES_PATHS = ['./node_modules/'];
+
 module.exports = {
   module: {
     loaders: [
@@ -19,7 +21,7 @@ module.exports = {
         loaders: [
           'style',
           'css',
-          'sass',
+          'sass?includePaths[]=' + SASS_INCLUDES_PATHS,
           'postcss'
         ]
       },
