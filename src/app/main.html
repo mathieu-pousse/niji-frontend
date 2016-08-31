@@ -1,0 +1,13 @@
+<div class="main-container">
+  <fountain-header></fountain-header>
+  <main class="main">
+    <fountain-title></fountain-title>
+    autocomplete goes here:
+    <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in getMatches(searchText)" md-item-text="item.display">
+      <span md-highlight-text="searchText">{{item.display}}</span>
+    </md-autocomplete>
+
+    <fountain-techs></fountain-techs>
+  </main>
+  <fountain-footer></fountain-footer>
+</div>
