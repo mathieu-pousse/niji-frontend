@@ -7,6 +7,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('../package.json');
 const autoprefixer = require('autoprefixer');
 
+const SASS_INCLUDES_PATHS = [];
+SASS_INCLUDES_PATHS.push(path.resolve(__dirname, '../node_modules', 'angular-material'));
+SASS_INCLUDES_PATHS.push(path.resolve(__dirname, '../node_modules', 'font-awesome/scss'));
+SASS_INCLUDES_PATHS.push(path.resolve(__dirname, '../node_modules', 'material-design-icons/iconfont'));
+
 module.exports = {
   module: {
     preLoaders: [
@@ -28,8 +33,12 @@ module.exports = {
         test: /\.(css|scss)$/,
         loaders: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
-          loader: 'css?minimize!sass!postcss'
+          loader: 'css?minimize!postcss!resolve-url!sass?sourceMap'
         })
+      },
+      {
+         test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
+         loader: 'url-loader?limit=10000'
       },
       {
         test: /\.js$/,
@@ -60,6 +69,9 @@ module.exports = {
     new ExtractTextPlugin('index-[contenthash].css')
   ],
   postcss: () => [autoprefixer],
+  sassLoader: {
+    includePaths: SASS_INCLUDES_PATHS
+  },
   output: {
     path: path.join(process.cwd(), conf.paths.dist),
     filename: '[name]-[hash].js'

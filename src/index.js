@@ -13,7 +13,6 @@ import {login} from './app/login';
 import {header} from './app/header';
 import {title} from './app/title';
 
-
 import './index.scss';
 
 angular
