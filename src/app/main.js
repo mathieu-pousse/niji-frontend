@@ -6,16 +6,8 @@ class MainController {
   }
 
   getMatches(input) {
-    const result = this.$q.defer()
-    result.resolve([
-        {display: "yo"},
-        {display: "mma"}, 
-        {display: "mma1"}, 
-        {display: "mma2"}, 
-        {display: "mma3"}, 
-        {display: "mma4"}
-      ].filter(i =>  i.display.indexOf(input) != -1))
-    return result.promise
+    return this.$http.get('/api/addresses/fr/zips/59100', {params: {q: input}})
+    .then(response => response.data)
   }
 }
 

@@ -7,11 +7,11 @@
         md-selected-item="$ctrl.selectedItem" 
         md-search-text="$ctrl.searchText"
         md-items="item in $ctrl.getMatches($ctrl.searchText)" 
-        md-item-text="item.display"
+        md-item-text="item.street"
         placeholder="What is your favorite US state?">
 
       <md-item-template>
-        <span md-highlight-text="searchText">{{item.display}}</span>
+        <span md-highlight-text="searchText">{{item.street}}</span>
       </md-item-template>
       <md-not-found>
         No matches found.
