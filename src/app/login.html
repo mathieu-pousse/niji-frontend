@@ -1,0 +1,23 @@
+<form id="loginForm">
+  <md-content layout="column">
+    <md-toolbar>
+      <h2 class="md-toolbar-tools">
+        <span>Connexion</span>
+      </h2>
+    </md-toolbar>
+    <md-input-container>
+      <label for="login">Login:</label>
+      <input ng-model="ctrl.credentials.login" agy-autofocus id="login">
+    </md-input-container>
+    <md-input-container ng-class="{'md-input-has-value': ctrl.credentials.password}">
+      <label for="user-pwd">Mot de passe:</label>
+      <input ng-model="ctrl.credentials.password" type="password" id="password">
+    </md-input-container>
+    <div class="errorMessage" ng-show="ctrl.hasError">{{ctrl.errorMessage}}</div>
+    <md-input-container layout="row" layout-align="center">
+      <md-button type="submit" class="md-raised md-primary" id="submitLogin" ng-click="ctrl.login(ctrl.credentials)">
+        Connexion
+      </md-button>
+    </md-input-container>
+  </md-content>
+</form>

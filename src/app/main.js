@@ -14,7 +14,7 @@ class MainController {
         {display: "mma2"}, 
         {display: "mma3"}, 
         {display: "mma4"}
-      ])
+      ].filter(i =>  i.display.indexOf(input) != -1))
     return result.promise
   }
 }

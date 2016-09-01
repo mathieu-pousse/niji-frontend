@@ -4,14 +4,18 @@
     <fountain-title></fountain-title>
     autocomplete goes here:
     <md-autocomplete 
-      md-selected-item="$ctrl.selectedItem"
-      md-items="item in $ctrl.getMatches(searchText)" 
-      md-item-text="item.display"
-      placeholder="What is your favorite US state?">
-      <span md-highlight-text="searchText">{{item.display}}</span>
-    </md-autocomplete>
+        md-selected-item="$ctrl.selectedItem" 
+        md-search-text="$ctrl.searchText"
+        md-items="item in $ctrl.getMatches($ctrl.searchText)" 
+        md-item-text="item.display"
+        placeholder="What is your favorite US state?">
 
-    <fountain-techs></fountain-techs>
+      <md-item-template>
+        <span md-highlight-text="searchText">{{item.display}}</span>
+      </md-item-template>
+      <md-not-found>
+        No matches found.
+      </md-not-found>
+    </md-autocomplete>
   </main>
-  <fountain-footer></fountain-footer>
 </div>
