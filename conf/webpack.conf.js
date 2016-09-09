@@ -5,6 +5,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
+const SASS_INCLUDES_PATHS = ['./node_modules/'];
+SASS_INCLUDES_PATHS.push(path.resolve(__dirname, '../node_modules', 'bootstrap-sass/assets/stylesheets'));
+
 module.exports = {
   module: {
     loaders: [
@@ -19,9 +22,14 @@ module.exports = {
         loaders: [
           'style',
           'css',
-          'sass',
-          'postcss'
+          'postcss',
+          'resolve-url',
+          'sass?sourceMap'
         ]
+      },
+      {
+        test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
+        loader: 'url-loader?limit=10000'
       },
       {
         test: /\.js$/,
@@ -47,6 +55,9 @@ module.exports = {
       inject: true
     })
   ],
+  sassLoader: {
+    includePaths: SASS_INCLUDES_PATHS
+  },
   postcss: () => [autoprefixer],
   debug: true,
   devtool: 'cheap-module-eval-source-map',
