@@ -5,9 +5,10 @@ const proxyMiddleware = require('http-proxy-middleware');
 module.exports = function () {
   return {
     server: {
-      middleware: proxyMiddleware('/api', 
+      middleware: proxyMiddleware('/api',
       {
-        target: 'http://192.168.2.212:8080/',
+        secure: false,
+        target: 'https://localhost:8443/backoffice/api',
         pathRewrite: {'^/api': '/'}
       }),
       baseDir: [

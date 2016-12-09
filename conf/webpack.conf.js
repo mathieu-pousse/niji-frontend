@@ -14,7 +14,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api*': {
-        target: 'http://192.168.2.212:8080',
+        target: 'https://localhost:8443/backoffice/api',
         secure: false,
       },
     },
@@ -32,7 +32,7 @@ module.exports = {
         loaders: [
           'style',
           'css',
-          'postcss', 
+          'postcss',
           'resolve-url',
           'sass?sourceMap',
         ]
@@ -70,7 +70,7 @@ module.exports = {
   },
   postcss: () => [autoprefixer],
   debug: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: '#cheap-module-eval-source-map',
   output: {
     path: path.join(process.cwd(), conf.paths.tmp),
     filename: 'index.js'

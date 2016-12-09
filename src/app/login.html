@@ -7,15 +7,15 @@
     </md-toolbar>
     <md-input-container>
       <label for="login">Login:</label>
-      <input ng-model="ctrl.credentials.login" agy-autofocus id="login">
+      <input ng-model="ctrl.credentials.login" agy-autofocus id="login" value="anonymous">
     </md-input-container>
     <md-input-container ng-class="{'md-input-has-value': ctrl.credentials.password}">
-      <label for="user-pwd">Mot de passe:</label>
-      <input ng-model="ctrl.credentials.password" type="password" id="password">
+      <label for="password">Mot de passe:</label>
+      <input ng-model="ctrl.credentials.password" type="password" id="password" value="s3cr3t">
     </md-input-container>
-    <div class="errorMessage" ng-show="ctrl.hasError">{{ctrl.errorMessage}}</div>
+    <div class="errorMessage" ng-show="$ctrl.showError">{{ $ctrl.errorMessage }}</div>
     <md-input-container layout="row" layout-align="center">
-      <md-button type="submit" class="md-raised md-primary" id="submitLogin" ng-click="ctrl.login(ctrl.credentials)">
+      <md-button type="submit" class="md-raised md-primary" id="submitLogin" ng-click="$ctrl.login(ctrl.credentials)">
         Connexion
       </md-button>
     </md-input-container>

@@ -1,8 +1,28 @@
 class LoginController {
+
   /** @ngInject */
-  constructor($q, $http) {
-    this.$q = $q;
+  constructor($state, $http, $timeout, authenticationService) {
+    this.$state = $state;
     this.$http = $http;
+    this.$timeout = $timeout;
+    this.authenticationService = authenticationService;
+    this.showError = false;
+    this.errorMessage = '';
+  }
+
+  login(credentials) {
+    console.log('gonna login');
+    this.authenticationService.login(credentials.login, credentials.password)
+      .then(user => this.$state.transitionTo('home'))
+      .catch(e => {
+        console.log(e);
+        this.showError = true;
+        this.errorMessage = 'Erreur de login.';
+        this.$timeout(() => {
+          this.showError = false;
+          this.errorMessage = '';
+        }, 5000);
+      });
   }
 }
 
