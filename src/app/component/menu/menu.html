@@ -1,0 +1,4 @@
+<md-sidenav md-component-id="left" class="md-sidenav-left sidenav" md-is-locked-open="true">
+  Menu goes here
+  <md-button ng-repeat="link in items" ng-click="$ctrl.goTo(link.state)">{{ link.label }}</md-button>
+</md-sidenav>

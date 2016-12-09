@@ -1,11 +1,18 @@
 export class AuthenticationService {
 
   /** @ngInject */
-  constructor($http, base64Service, jwtTokenService) {
+  constructor($http, $state, base64Service, jwtTokenService) {
     this.$http = $http;
+    this.$state = $state;
     this.base64Service = base64Service;
     this.user = null;
     this.jwtTokenService = jwtTokenService;
+  }
+
+  refresh() {
+    console.log('give a try w/ previous token');
+    return this.$http.get('/api/login')
+      .then(result => this.loggedIn(result.data));
   }
 
   isAuthenticated() {
@@ -20,7 +27,7 @@ export class AuthenticationService {
 
   logout() {
     this.user = null;
-    this.jwtTokenService.lastJWTToken = null;
+    this.jwtTokenService.setLastJWTToken(null);
   }
 
   getBasicAuth(user, password) {

@@ -35,8 +35,18 @@ angular
     $transitions.onStart({
       to: (state) => state.notAuthenticated !== true
     }, function (trans) {
-      if (!trans.injector().get('authenticationService').isAuthenticated()) {
-        return trans.injector().get('$state').target('login');
+      var authenticationService = trans.injector().get('authenticationService');
+      if (!authenticationService.isAuthenticated()) {
+        const $q = trans.injector().get('$q');
+        const defered = $q.defer();
+        authenticationService.refresh()
+          .then(() => {
+            return defered.resolve(true)
+          })
+          .catch(() => {
+            return defered.resolve(trans.injector().get('$state').transitionTo('login'))
+          });
+        return defered;
       }
       return true;
     });

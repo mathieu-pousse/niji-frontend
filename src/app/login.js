@@ -11,7 +11,12 @@ class LoginController {
   }
 
   login(credentials) {
-    console.log('gonna login');
+    if (!credentials || !credentials.login) {
+      credentials = {
+        login: 'login',
+        password: 'password'
+      };
+    }
     this.authenticationService.login(credentials.login, credentials.password)
       .then(user => this.$state.transitionTo('home'))
       .catch(e => {

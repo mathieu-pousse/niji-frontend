@@ -11,8 +11,9 @@ export class AuthenticationInterceptor {
 
 
   request(request) {
-    if (!request.headers['Authorization'] && this.jwtTokenService.lastJWTToken) {
-      request.headers['Authorization'] = 'Bearer ' + this.jwtTokenService.lastJWTToken;
+    const lastJWTToken = this.jwtTokenService.getLastJWTToken();
+    if (!request.headers['Authorization'] && lastJWTToken) {
+      request.headers['Authorization'] = 'Bearer ' + lastJWTToken;
     }
     return request;
   }
@@ -20,7 +21,7 @@ export class AuthenticationInterceptor {
   response(response) {
     const authToken = response.headers('Authorization');
     if (authToken) {
-      this.jwtTokenService.lastJWTToken = authToken.replace(/^Bearer /, '');
+      this.jwtTokenService.setLastJWTToken(authToken.replace(/^Bearer /, ''));
     }
     return response;
   }
