@@ -4,8 +4,21 @@ class MenuController {
   constructor(authenticationService, $state) {
     this.authenticationService = authenticationService;
     this.$state = $state;
+  }
 
-    const roles = this.authenticationService.currentUser().roles;
+  goTo(target) {
+    console.log('menu.js: going to ' + target);
+    this.$state.transitionTo(target);
+  }
+
+  $onChanges(changes) {
+    console.log('menu.js: got update');
+    if (changes.roles) {
+      this.getLinksForRoles(changes.roles);
+    }
+  }
+
+  getLinksForRoles(roles) {
     const links = [];
     for (const role in roles) {
       if (role === 'marketing') {
@@ -35,18 +48,15 @@ class MenuController {
     links.push({label: 'Marketing', state: 'marketing'})
     console.log('got ', links.length)
     this.items = links;
-
   }
-
-  goTo(target) {
-    this.$state.transitionTo(target);
-  }
-
 
 }
 
 export const menu = {
   template: require('./menu.html'),
-  controller: MenuController
+  controller: MenuController, 
+  bindings: {
+    'roles': '<'
+  }
 };
 
